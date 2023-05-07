@@ -1,0 +1,29 @@
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 40px;
+  overflow: auto;
+  padding: 10px;
+  display: grid;
+  top:0;
+  align-content:flex-start;
+}
+
+.logo-container {
+  height: 5%;
+  width: 100%;
+  padding: 5%;
+}
+.logo-container .image img {
+  height: 100px !important;
+}
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+}

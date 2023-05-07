@@ -1,0 +1,17 @@
+.sidebar-item {
+  padding: 5%;
+  margin-top: 5%;
+  cursor: pointer;
+  display: grid;
+  align-content: center;
+  border-radius: 0.50rem;
+  max-width: 100%;
+  position: relative;
+
+}
+
+.sidebar-item:hover {
+  background-color: $primary;
+  color: #fff;
+  font-weight: bold;
+}
