@@ -8,7 +8,7 @@ export type SidebarItemProps = {
 
 function SidebarItem({ title, icon }: SidebarItemProps) {
   return (
-    <>
+  
       <div className="sidebar-item ">
         <span className="icon-text ">
           <span className="icon">{icon ? icon({}) : <VscBlank />}</span>
@@ -16,7 +16,7 @@ function SidebarItem({ title, icon }: SidebarItemProps) {
         </span>
       </div>
  
-    </>
+    
   );
 }
 

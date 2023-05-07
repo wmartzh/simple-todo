@@ -2,6 +2,7 @@ import SimpleLogo from "../assets/simple.svg";
 import SidebarItem, { SidebarItemProps } from "../components/SidebarItem";
 import { BiCalendarCheck, BiRocket, BiMenu, BiX } from "react-icons/bi";
 import { SyntheticEvent } from "react";
+import Tag from "./Tag";
 
 type SidebarProps = {
   handleOpen: (e: SyntheticEvent) => void;
@@ -46,7 +47,16 @@ const SidebarContent = ({ isOpen }: { isOpen: boolean }) => {
           <img src={SimpleLogo} alt="logo" />
         </figure>
       </div>
-      <div className="sidebar-content">{SidebarItems.map(renderItems)}</div>
+      <div className="sidebar-content">
+        {SidebarItems.map(renderItems)}
+        <br />
+      
+        <h3>Tags</h3>
+      
+      
+        <Tag title="Work"></Tag>
+        <Tag title="Personal"></Tag>
+      </div>
     </div>
   );
 };
@@ -57,7 +67,9 @@ function Sidebar({ open, handleOpen }: SidebarProps) {
     <>
       <MobileMenu handleOpen={handleOpen} isOpen={open} />
 
-      <SidebarContent isOpen={open}></SidebarContent>
+      <SidebarContent isOpen={open}/>
+  
+    
     </>
   );
 }

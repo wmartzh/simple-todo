@@ -4,12 +4,40 @@
   cursor: pointer;
   display: grid;
   align-content: center;
-  border-radius: 0.50rem;
+  border-radius: 0.5rem;
+  max-width: 100%;
+  position: relative;
+}
+.tag-container {
+  width: 100%;
+  padding-left: 5%;
+  margin-top: 5%;
+  display: grid;
+  align-content: center;
+  border-radius: 0.5rem;
   max-width: 100%;
   position: relative;
 
+  .icon {
+    display: inline;
+    cursor: pointer;
+  }
 }
+.tag-text {
 
+  display: inline;
+  cursor: text;
+}
+.react-colorful {
+  height: 240px;
+}
+.tag-input {
+  border: none;
+  outline: none;
+  display: inline;
+  width: 60%;
+  font-size: medium;
+}
 .sidebar-item:hover {
   background-color: $primary;
   color: #fff;
@@ -20,10 +48,8 @@
 }
 
 @media screen and (max-width: 700px) {
-
   .sidebar-item .icon {
     display: grid;
     align-content: center;
   }
-
 }
