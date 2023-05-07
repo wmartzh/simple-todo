@@ -1,36 +1,22 @@
+import { SyntheticEvent, useState } from "react";
 import Sidebar from "../components/Sidebar";
-import SidebarItem, { SidebarItemProps } from "../components/SidebarItem";
-import { BiCalendarCheck, BiRocket } from "react-icons/bi";
 
 type MainLayoutProps = {
   children: JSX.Element;
 };
 
-const SidebarItems: SidebarItemProps[] = [
-  {
-    title: "Day Planner",
-    icon: BiCalendarCheck,
-  },
-  {
-    title: "Priority",
-    icon: BiRocket,
-  },
-];
-
-
-function renderItems(item: SidebarItemProps){
-  return <SidebarItem title={item.title} icon={item.icon}/>;
-}
-
-
 function MainLayout({ children }: MainLayoutProps) {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = (e: SyntheticEvent) => {
+    e.preventDefault();
+    setOpen(!open);
+  };
   return (
     <>
       <div className="main-container">
-        <Sidebar>
-           {SidebarItems.map(renderItems)}
-        </Sidebar>
-        <div className="content">{children}</div>
+        <Sidebar open={open} handleOpen={handleOpen}></Sidebar>
+        <div className={!open ? "content-open" : "content"}>{children}</div>
       </div>
     </>
   );
