@@ -1,66 +1,62 @@
-import { useState } from "react";
-import { HexColorPicker } from "react-colorful";
+import {  useState } from "react";
 import { BiCircle } from "react-icons/bi";
-
+import { TagData } from "./SidebarContent";
+import { ClickOutsideDetector } from "../hooks/ClickOutsideDetector";
+import{ BlockPicker } from "react-color"
+import { ColorResult } from "react-color";
 export type TagProps = {
-  title: string;
+  item: TagData;
+  handleUpdate: (index: string, name?: string, color?: string) => void;
 };
-function Tag({ title }: TagProps) {
-  const [tagText, setTagText] = useState(title);
+function Tag({  item, handleUpdate }: TagProps) {
   const [editing, setEditing] = useState(false);
   const [picker, setPicker] = useState(false);
-  const [color, setColor] = useState("#000");
 
-  const handleChangeColor = (color: string) => {
-    setColor(color);
+  const handleChangeColor = (color: ColorResult) => {
+    handleUpdate(item.id, undefined, color.hex);
   };
-
-  const handleDoubleClick = () => {
-    setEditing(true);
-  };
-
-  const handleBlur = () => {
-    setEditing(false);
-  };
-
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTagText(event.target.value);
+    handleUpdate(item.id, event.target.value);
   };
+
   return (
     <div className="tag-container">
-      <span className="icon-text">
-        <span className="icon" onClick={() => setPicker(!picker)}>
-          <BiCircle color={color} />
-        </span>
-        {editing ? (
-          <input
-            className="tag-input"
-            type="text"
-            value={tagText}
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            autoFocus
-            style={{color}}
-          />
-        ) : (
-          <span
-            className="tag-text"
-            style={{ color }}
-            onDoubleClick={handleDoubleClick}
-          >
-            {title}
+      <ClickOutsideDetector onClickOutside={() => setPicker(false)}>
+        <span className="icon-text">
+          <span className="icon" onClick={() => setPicker(!picker)}>
+            <BiCircle color={item.color} />
           </span>
+          {editing ? (
+            <input
+              className="tag-input"
+              type="text"
+              value={item.name}
+              onChange={handleInputChange}
+              onBlur={() => setEditing(false)}
+              autoFocus
+              style={{ color: item.color }}
+            />
+          ) : (
+            <span
+              className="tag-text"
+              style={{ color: item.color }}
+              onDoubleClick={() => setEditing(true)}
+            >
+              {item.name}
+            </span>
+          )}
+        </span>
+        {picker ? (
+          <BlockPicker
+            color={item.color}
+            onChangeComplete={handleChangeColor}
+            triangle="hide"
+          ></BlockPicker>
+        ) : (
+          <span></span>
         )}
-      </span>
-      {picker ? (
-        <HexColorPicker
-          color={color}
-          onChange={handleChangeColor}
-        ></HexColorPicker>
-      ) : (
-        <span></span>
-      )}
+      </ClickOutsideDetector>
     </div>
   );
 }

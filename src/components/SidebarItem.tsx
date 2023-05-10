@@ -4,12 +4,13 @@ import { VscBlank } from "react-icons/vsc";
 export type SidebarItemProps = {
   title: string;
   icon?: IconType;
+  onClick?: ()=> void
 };
 
-function SidebarItem({ title, icon }: SidebarItemProps) {
+function SidebarItem({ title, icon, onClick }: SidebarItemProps  ) {
   return (
   
-      <div className="sidebar-item ">
+      <div onClick={onClick} className="sidebar-item ">
         <span className="icon-text ">
           <span className="icon">{icon ? icon({}) : <VscBlank />}</span>
           <span className="sidebar-text">{title}</span>
