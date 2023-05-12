@@ -1,19 +1,20 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
+import DayPlanner from './pages/DayPlanner'
 
 function App() {
 
 
   return (
     <>
-    <MainLayout>
-  
-        <div className="columns">
-          <div className="columnt">
-            <h1>Test</h1>
-          </div>
-        </div>
-    
-    </MainLayout>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout/>}>
+          <Route path="/" element={<DayPlanner/>}></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
     </>
   )
 }
