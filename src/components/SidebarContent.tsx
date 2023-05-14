@@ -1,18 +1,18 @@
 import { useState } from "react";
-import SidebarItem, { SidebarItemProps } from "./SidebarItem";
+import SidebarItem from "./SidebarItem";
 import { BiCalendarCheck, BiRocket } from "react-icons/bi";
 import SimpleLogo from "../assets/simple.svg";
 import { v4 } from "uuid";
 import Tag from "./Tag";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addTag, editTag } from "../features/TagsSlice";
 export type TagData = {
   id: string;
   color: string;
   name: string;
 };
 
-function renderItems(item: SidebarItemProps, index: number) {
-  return <SidebarItem title={item.title} icon={item.icon} key={index} />;
-}
+
 function mapTagData(value: TagData, id: string, color?: string, name?: string) {
   const temp = value;
   if (id === value.id) {
@@ -27,23 +27,15 @@ function mapTagData(value: TagData, id: string, color?: string, name?: string) {
 }
 
 const SidebarContent = ({ isOpen }: { isOpen: boolean }) => {
-  const [tagData, setTagData] = useState<TagData[]>([
-    {
-      id: "1",
-      name: "Work",
-      color: "#000",
-    },
-  ]);
+  const dispatch = useAppDispatch()
+  const tags = useAppSelector((state)=> state.tags)
 
-  const addTag = () => {
-    setTagData([
-      ...tagData,
-      { id: v4(), name: "write a name ", color: "#000" },
-    ]);
+  const add = () => {
+    dispatch(addTag({ id: v4(), name: "write a name ", color: "#000" }));
   };
 
   const handleUpdateTag = (id: string, name?: string, color?: string) => {
-    setTagData(tagData.map((value) => mapTagData(value, id, color, name)));
+    dispatch(editTag({id, color, name}))
   };
 
   return (
@@ -60,10 +52,10 @@ const SidebarContent = ({ isOpen }: { isOpen: boolean }) => {
         <br />
 
         <h3>Tags</h3>
-        {tagData.map((tag, index) => (
+        {tags.map((tag, index) => (
           <Tag item={tag} handleUpdate={handleUpdateTag} key={index} />
         ))}
-        <SidebarItem title="Add new" onClick={addTag} />
+        <SidebarItem title="Add new" onClick={add} />
       </div>
     </div>
   );
