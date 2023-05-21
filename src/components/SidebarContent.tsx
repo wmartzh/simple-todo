@@ -5,26 +5,8 @@ import SimpleLogo from "../assets/simple.svg";
 import { v4 } from "uuid";
 import Tag from "./Tag";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { addTag, editTag } from "../features/TagsSlice";
-export type TagData = {
-  id: string;
-  color: string;
-  name: string;
-};
+import { addTag, editTag } from "../features/tags-slice";
 
-
-function mapTagData(value: TagData, id: string, color?: string, name?: string) {
-  const temp = value;
-  if (id === value.id) {
-    if (color) {
-      temp.color = color;
-    }
-    if (name !== undefined) {
-      temp.name = name;
-    }
-  }
-  return temp;
-}
 
 const SidebarContent = ({ isOpen }: { isOpen: boolean }) => {
   const dispatch = useAppDispatch()
@@ -35,7 +17,7 @@ const SidebarContent = ({ isOpen }: { isOpen: boolean }) => {
   };
 
   const handleUpdateTag = (id: string, name?: string, color?: string) => {
-    dispatch(editTag({id, color, name}))
+    dispatch(editTag({id, value:{name, color}}))
   };
 
   return (

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import MainLayout from './layouts/MainLayout'
-import DayPlanner from './pages/DayPlanner'
+import MainLayout from './layouts/main-layout'
+import DayPlanner from './pages/day-planner'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 

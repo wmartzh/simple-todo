@@ -1,0 +1,28 @@
+.task-container {
+  width: 100%;
+  display: block;
+  padding: 1%;
+  // border: 2px solid rebeccapurple;
+
+  .task-check {
+    display: inline;
+  }
+  .task-text {
+    display: inline;
+  }
+  .task-content {
+    display: flex;
+    align-items: flex-end;
+  }
+  .task-input {
+    border: none;
+    outline: none;
+    display: inline;
+    width: 100%;
+    font-size: medium;
+  }
+  .text-container{
+    width: 100%;
+    display: inline-block;
+  }
+}

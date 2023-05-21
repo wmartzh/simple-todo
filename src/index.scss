@@ -2,30 +2,36 @@
 
 $primary: rgb(0, 150, 199);
 
-
 * {
   margin: 0;
   padding: 0;
 }
 
-
-
-.content-close{
+.content-close {
   height: 100vh;
   margin-left: 200px;
   padding: 5%;
 }
-.content-open{
+.content-open {
   height: 100vh;
   margin-left: 0;
   padding: 5%;
 }
 
-
+.text-input {
+  border: none;
+  outline: none;
+  display: inline;
+  font-size: medium;
+}
 
 /**bulma**/
 @import "../node_modules/bulma/bulma.sass";
 
 /*Sidebar*/
-@import "../src/css/sidebar.scss";
-@import "../src/css/sidebar-item.scss";
+@import "../src/scss/sidebar.scss";
+@import "../src/scss/sidebar-item.scss";
+
+// Tasks
+@import "../src/scss/task.scss";
+@import "../src/scss/checkbox.scss";

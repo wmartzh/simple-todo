@@ -1,14 +1,14 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { BiCircle } from "react-icons/bi";
-import { TagData } from "./SidebarContent";
-import { ClickOutsideDetector } from "../hooks/ClickOutsideDetector";
-import{ BlockPicker } from "react-color"
+import { ClickOutsideDetector } from "../hooks/click-outside-hook";
+import { BlockPicker } from "react-color";
 import { ColorResult } from "react-color";
+import { TagType } from "../types/tasks";
 export type TagProps = {
-  item: TagData;
+  item: TagType;
   handleUpdate: (index: string, name?: string, color?: string) => void;
 };
-function Tag({  item, handleUpdate }: TagProps) {
+function Tag({ item, handleUpdate }: TagProps) {
   const [editing, setEditing] = useState(false);
   const [picker, setPicker] = useState(false);
 

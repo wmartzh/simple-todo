@@ -1,18 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { TagType } from "../types/tasks";
 
-interface Tag {
-  id: string;
-  color: string;
-  name: string;
-}
 
 type EditTag = {
   id: string;
-  color?: string;
-  name?: string;
+  value: Partial<Omit<TagType, "id">>;
 };
 
-type TagState = Tag[];
+type TagState = TagType[];
 
 const initialState: TagState = [];
 
@@ -20,16 +15,17 @@ const TagsSlice = createSlice({
   name: "tags",
   initialState,
   reducers: {
-    addTag(state, action: PayloadAction<Tag>) {
+    addTag(state, action: PayloadAction<TagType>) {
       state.push(action.payload);
     },
     editTag(state, action: PayloadAction<EditTag>) {
       const index = state.findIndex((e) => e.id === action.payload.id);
-      if (action.payload.color) {
-        state[index].color = action.payload.color;
+      const { color, name} = action.payload.value
+      if (color) {
+        state[index].color = color;
       }
-      if (action.payload.name !== undefined) {
-        state[index].name = action.payload.name;
+      if (name !== undefined) {
+        state[index].name = name;
       }
     },
   },
