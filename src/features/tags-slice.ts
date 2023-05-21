@@ -1,36 +1,47 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TagType } from "../types/tasks";
-
+import { getAllTags } from "../services/tags.service";
 
 type EditTag = {
   id: string;
   value: Partial<Omit<TagType, "id">>;
 };
 
-type TagState = TagType[];
+type TagState = {
+  tags: TagType[]
+}
 
-const initialState: TagState = [];
+const initialState: TagState ={
+  tags:[]
+}
 
 const TagsSlice = createSlice({
   name: "tags",
   initialState,
   reducers: {
     addTag(state, action: PayloadAction<TagType>) {
-      state.push(action.payload);
+      //to be defined
+      state.tags.push(action.payload)
     },
+
+    replaceTags(state, action: PayloadAction<TagType[]>) {
+      state.tags = action.payload
+    },
+
+
     editTag(state, action: PayloadAction<EditTag>) {
-      const index = state.findIndex((e) => e.id === action.payload.id);
-      const { color, name} = action.payload.value
+      const index = state.tags.findIndex((e) => e.id === action.payload.id);
+      const { color, name } = action.payload.value;
       if (color) {
-        state[index].color = color;
+        state.tags[index].color = color;
       }
       if (name !== undefined) {
-        state[index].name = name;
+        state.tags[index].name = name;
       }
     },
   },
 });
 
-export const { addTag, editTag } = TagsSlice.actions;
+export const { addTag, editTag, replaceTags } = TagsSlice.actions;
 
 export default TagsSlice.reducer;

@@ -4,6 +4,7 @@ import { ClickOutsideDetector } from "../hooks/click-outside-hook";
 import { BlockPicker } from "react-color";
 import { ColorResult } from "react-color";
 import { TagType } from "../types/tasks";
+
 export type TagProps = {
   item: TagType;
   handleUpdate: (index: string, name?: string, color?: string) => void;
@@ -36,6 +37,7 @@ function Tag({ item, handleUpdate }: TagProps) {
               onBlur={() => setEditing(false)}
               autoFocus
               style={{ color: item.color }}
+              
             />
           ) : (
             <span

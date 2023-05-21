@@ -10,6 +10,6 @@ export interface TaskType {
 
 export interface TagType {
   id: string
-  name?: string;
-  color?: string;
+  name: string;
+  color: string;
 }
