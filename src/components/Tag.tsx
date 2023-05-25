@@ -7,20 +7,27 @@ import { TagType } from "../types/tasks";
 
 export type TagProps = {
   item: TagType;
-  handleUpdate: (index: string, name?: string, color?: string) => void;
+  handleEdit: (index: string, name?: string, color?: string) => void;
+  handleUpdate: (id: string, item: Partial<TagType>) => void;
+
 };
-function Tag({ item, handleUpdate }: TagProps) {
+function Tag({ item, handleUpdate, handleEdit }: TagProps) {
   const [editing, setEditing] = useState(false);
   const [picker, setPicker] = useState(false);
 
   const handleChangeColor = (color: ColorResult) => {
-    handleUpdate(item.id, undefined, color.hex);
+    handleEdit(item.id, undefined, color.hex)
+    handleUpdate(item.id,{color:color.hex});
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    handleUpdate(item.id, event.target.value);
+    handleEdit(item.id, event.target.value);
   };
-
+  const handleOnBlur = () => {
+    const { id, ...rest } = item;
+    setEditing(false);
+    handleUpdate(id, rest);
+  };
   return (
     <div className="tag-container">
       <ClickOutsideDetector onClickOutside={() => setPicker(false)}>
@@ -34,10 +41,9 @@ function Tag({ item, handleUpdate }: TagProps) {
               type="text"
               value={item.name}
               onChange={handleInputChange}
-              onBlur={() => setEditing(false)}
+              onBlur={handleOnBlur}
               autoFocus
               style={{ color: item.color }}
-              
             />
           ) : (
             <span

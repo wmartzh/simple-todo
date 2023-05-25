@@ -2,7 +2,7 @@ import { TagType } from "../types/tasks";
 import axiosInstance from "./axios";
 
 const TAGS_PATH = "/tags"
-export async function createTag(tag: Omit<TagType,'id'>){
+ async function createTag(tag: Omit<TagType,'id'>){
   try {
 
     const response = await  axiosInstance.post(TAGS_PATH, tag);
@@ -13,10 +13,10 @@ export async function createTag(tag: Omit<TagType,'id'>){
     
   }
 }
-export async function updateTag(id:string, tag: Partial<Omit<TagType,'id'>>){
+ async function updateTag(id:string, tag: Partial<Omit<TagType,'id'>>){
   try {
 
-    const response = await  axiosInstance.post(`${TAGS_PATH}/${id}`, tag);
+    const response = await  axiosInstance.put(`${TAGS_PATH}/${id}`, tag);
     return response.data satisfies TagType
   } catch (error) {
 
@@ -25,7 +25,7 @@ export async function updateTag(id:string, tag: Partial<Omit<TagType,'id'>>){
   }
 }
 
-export async function getAllTags(){
+ async function getAllTags(){
   try {
     const response = await axiosInstance.get(TAGS_PATH);
 
@@ -36,4 +36,10 @@ export async function getAllTags(){
     console.log('◉ ▶ file: tags.service.ts:22 ▶ getAllTags ▶ error:', error);
     
   }
+}
+
+export default {
+  getAllTags,
+  updateTag,
+  createTag
 }
